@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weather Forcast</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div class="container">
+        <div class="weather-container">
+
+            <div>
+                <img id="image" src="" alt="">
+            </div>
+            <div id="temperature">
+                Temperature
+            </div>
+            <div id="loc">
+                location
+            </div>
+            <div id="summary">
+                Summary
+            </div>
+
+        </div>
+    </div>
+
+
+    <script>
+
+
+        let latitude;
+        let longitude;
+        let APIkey = 'c122dc4c661047aa99b5a73dd4c51857';
+        let image = document.getElementById('image');
+        let temp = document.getElementById('temperature');
+        let loc = document.getElementById('loc');
+        let summary = document.getElementById('summary');
+
+        window.navigator.geolocation.getCurrentPosition((success) => {
+        latitude = success.coords.latitude;
+        longitude = success.coords.latitude;
+        
+        fetch(`https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&appid=${APIkey}`)
+        .then(response => response.json())
+        .then(data => {
+            temp.innerHTML = Math.round((data.main.temp - 273.2)) + "°C";
+            loc.innerHTML = data.name + ", " + data.sys.country;
+            summary.innerHTML = data.weather[0].description;
+            var imgURL = 'http://openweathermap.org/img/wn/' + data.weather[0].icon + '@2x.png';
+            image.setAttribute('src', imgURL);
+        })
+
+
+        })
+        
+        
+
+
+
+    </script>
+</body>
+
+</html>

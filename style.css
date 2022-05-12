@@ -1,0 +1,15 @@
+body{
+    margin: 0;
+    font-weight: bolder;
+    border-radius: 39px;
+    background: linear-gradient(to right, rgb(30, 40, 71), rgb(48, 131, 213));
+}
+
+.container{
+    font-size: larger;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
